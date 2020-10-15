@@ -53,23 +53,23 @@ echo "triplet: ${triplet[@]}"
 
 function perc() {
 factor=$(($1*100))
-percent=$(perl -E "say $factor/$n")
+percent=$(($factor/$n))
 echo "combination: $percent %"
+max[$2]=$percent
 }
-echo "H"; perc "$count1"
-echo "T"; perc "$count2"
-echo "HH"; perc "$c1"
-echo "HT"; perc "$c2"
-echo "TH"; perc "$c3"
-echo "TT"; perc "$c4"
-echo "HHH"; perc "$p1"
-echo "HHT"; perc "$p2"
-echo "HTH"; perc "$p3"
-echo "HTT"; perc "$p4"
-echo "TTT"; perc "$p5"
-echo "TTH"; perc "$p6"
-echo "THT"; perc "$p7"
-echo "THH"; perc "$p8"
-
-
-
+echo "H"; perc "$count1" "1"
+echo "T"; perc "$count2" "2"
+echo "HH"; perc "$c1" "3"
+echo "HT"; perc "$c2" "4"
+echo "TH"; perc "$c3" "5"
+echo "TT"; perc "$c4" "6"
+echo "HHH"; perc "$p1" "7"
+echo "HHT"; perc "$p2" "8"
+echo "HTH"; perc "$p3" "9"
+echo "HTT"; perc "$p4" "10"
+echo "TTT"; perc "$p5" "11"
+echo "TTH"; perc "$p6" "12"
+echo "THT"; perc "$p7" "13"
+echo "THH"; perc "$p8" "14"
+IFS=$'\n' sorted=($(sort -nr <<<"${max[*]}")); unset IFS
+echo "Winning combination percentage: ${sorted[0]}"
